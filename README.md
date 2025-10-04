@@ -1,5 +1,5 @@
 # Driver: Parallel Lines - Fusion Fix
-This is a project that aims to fix issues in the PC port of DRIVER: Parallel Lines (2007)
+This is a project that aims to fix issues and add small features in the PC port of DRIVER: Parallel Lines (2007)
 
 ## Releases
 You can get the latest release [here](https://github.com/BuilderDemo7/DPLFusionFix/releases),
