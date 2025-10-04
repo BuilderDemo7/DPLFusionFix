@@ -11,6 +11,7 @@ The code is open-source, allowing anyone to obtain and edit the code.
 ## Features
 - Garage camera restored
 - Debug menu restored (enable it by renaming the files: GUI/Frontend to GUI/Dev)
+- Fix: crashes on Era change or going back to the menu
 ### Optional features
 #### Graphics
 - PS2 version like glow/bloom effects
