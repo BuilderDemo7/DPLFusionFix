@@ -7,7 +7,7 @@ it is highly recommended to pick the "Release" version as it's more compatible.
 
 ## Installation
 1. Download the latest release
-2. Extract the files inside the .zip file of the release in the folder where Driver: Parallel Lines is installed
+2. Extract the files inside the .zip file of the release to the folder where Driver: Parallel Lines is installed
 
 ## Configuration
 Jump to [Settings](https://github.com/BuilderDemo7/DPLFusionFix/tree/master?tab=readme-ov-file#settings) if you want to see the list of the adjustable settings
