@@ -5,6 +5,22 @@ This is a project that aims to fix issues and add small features in the PC port 
 You can get the latest release [here](https://github.com/BuilderDemo7/DPLFusionFix/releases),
 it is highly recommended to pick the "Release" version as it's more compatible.
 
+## Installation
+1. Download the latest release
+2. Extract the files inside the .zip file of the release in the folder where Driver: Parallel Lines is installed
+
+## Configuration
+Jump to [Settings](https://github.com/BuilderDemo7/DPLFusionFix/tree/master?tab=readme-ov-file#settings) if you want to see the list of the adjustable settings
+of the .ini file.
+
+### Garage Camera
+To configure the controls for using the garage camera go in Settings -> Controls -> Customize Controls -> Visuals,
+once you're there, bind the "Camera Look Left", "Camera Look Right", "Camera Look Back" and "Camera Look Forward",
+If you're playing on a keyboard you can simply bind these to JKLO but if you're playing on a joystick/gamepad just use the right analogic stick.
+
+### Turn signals
+The turn signals are using the arrow left and arrow right or D-pad left and D-pad right for alternating between both directions by default.
+
 ## License & Warranty
 The code is open-source, allowing anyone to obtain and edit the code.
 
