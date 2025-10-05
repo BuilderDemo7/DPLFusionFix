@@ -103,10 +103,12 @@ void OnInitializePlugin()
 	}
 
 	// HOOKS
-	InjectHook(0x465721, HooksClass::Before_OnEnterGarageState, PATCH_JUMP);
+	
+	// Potentially causing garage crashes for some people
+	//InjectHook(0x465721, HooksClass::Before_OnEnterGarageState, PATCH_JUMP);
 
-	Nop(0x465e30, 7);
-	InjectHook(0x465e30, HooksClass::After_OnEnterGarageState, PATCH_JUMP);
+	//Nop(0x465e30, 7);
+	//InjectHook(0x465e30, HooksClass::After_OnEnterGarageState, PATCH_JUMP);
 
 	Nop(0x4c4cb9, 9);
 	InjectHook(0x4c4cb9, HooksClass::ProcessCommandExtension_Frontend, PATCH_JUMP);
@@ -114,25 +116,39 @@ void OnInitializePlugin()
 	Nop(0x45acc4, 7);
 	InjectHook(0x45acc4, &HooksClass::GameSimulationStep, PATCH_JUMP);
 
-	WriteAt(0x5fc7e6 + 1, "\x09", 1);
-	Nop(0x5fc7e3, 3);
-	Nop(0x5fc7f1, 9);
-	InjectHook(0x5fc7f1, HooksClass::HeapFree_Fix_Validation, PATCH_JUMP);
+	// this will fix some crashes when going on Era change or back to the menu
+	if (SettingsMgr->bHeapFree_Validation_Fix)
+	{
+		WriteAt(0x5fc7e6 + 1, "\x09", 1);
+		Nop(0x5fc7e3, 3);
+		Nop(0x5fc7f1, 9);
+		InjectHook(0x5fc7f1, HooksClass::HeapFree_Fix_Validation, PATCH_JUMP);
+	}
 
-	InjectHook(0x4a80c9, &CState_Frontend::OnEnterState, PATCH_CALL);
+	// likely unused by the game
+	//InjectHook(0x4a80c9, &CState_Frontend::OnEnterState, PATCH_CALL);
 
-	Nop(0x4aa075, 6);
-	InjectHook(0x4aa075, &HooksClass::Custom_Load_Dev_Menu, PATCH_JUMP);
+	if (SettingsMgr->bLoad_Frontend_Dev_Menu)
+	{
+		Nop(0x4aa075, 6);
+		InjectHook(0x4aa075, &HooksClass::Custom_Load_Dev_Menu, PATCH_JUMP);
+	}
 
-	Nop(0x5AF86C, 5);
-	InjectHook(0x5AF86C, &HooksClass::Classic_BurnOut_Hook, PATCH_JUMP);
+	if (SettingsMgr->bClassic_BurnOut)
+	{
+		Nop(0x5AF86C, 5);
+		InjectHook(0x5AF86C, &HooksClass::Classic_BurnOut_Hook, PATCH_JUMP);
+	}
 
-	Nop(0x49f986, 6);
-	InjectHook(0x49f986, &HooksClass::Turn_Signal_Feature, PATCH_JUMP);
+	if (SettingsMgr->bPlayer_Can_Use_Turn_Signal)
+	{
+		Nop(0x49f986, 6);
+		InjectHook(0x49f986, &HooksClass::Turn_Signal_Feature, PATCH_JUMP);
+	}
 
 	// HRESULT __fastcall EndScene__i4HRESULT(CViewport *viewport)
-	Nop(0x5e455b, 15); // nop all except 'ret' (return)
-	InjectHook(0x5e455b, &HooksClass::D3DDevice_EndScene_Patches, PATCH_JUMP); // re-direct the function to ours, like a thunk function
+	//Nop(0x5e455b, 15); // nop all except 'ret' (return)
+	//InjectHook(0x5e455b, &HooksClass::D3DDevice_EndScene_Patches, PATCH_JUMP); // re-direct the function to ours, like a thunk function
 
 	//InjectHook(0x4b7f36, HooksClass::GameOverlays_DrawHooked_Debug);
 
@@ -143,10 +159,11 @@ void OnInitializePlugin()
 	{
 		WriteAt(0x459f8e + 1, "\x01", 1); // pause_devMenuBTN->SetRenderState(1);
 		
-		// NOTE: for your safety you can't access frontend dev menu by default!
+		// NOTE: for your safety you better not access frontend dev menu!
 		// it will crash the game, so stick to the pause menu dev menu :/
-		//WriteAt(0x4AA523 + 1, "\x01", 1); // frontend_devMenuBTN->SetRenderState(1);
+		WriteAt(0x4aa522 + 1, "\x01", 1); // frontend_devMenuBTN->SetRenderState(1);
 	
+		//Nop(0x4aa3f2, 9); // disable launch_dev_menu
 		//Nop(0x459f8c, 14);
 	}
 	if (SettingsMgr->bMinimap_Driver3_Goons)

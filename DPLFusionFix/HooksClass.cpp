@@ -838,9 +838,15 @@ void __declspec(naked) HooksClass::Turn_Signal_Feature()
 
 	// esi = this
 	// those are from 0 fields or unused fields
-	static int* whichOnesAreOn = (int*)(previousESI + 0x20C);
-	static float* turnSignalSwitchTime = (float*)(previousESI + 0x210);
-	static bool* turnSignalLightOn = (bool*)(previousESI + 0x214);
+	
+	// better not use fields you don't know because they will crash the game
+	//static int* whichOnesAreOn = (int*)(previousESI + 0x20C);
+	//static float* turnSignalSwitchTime = (float*)(previousESI + 0x210);
+	//static bool* turnSignalLightOn = (bool*)(previousESI + 0x214);
+	static int whichOnesAreOn = 0;
+	static float turnSignalSwitchTime = 0;
+	static bool turnSignalLightOn = 0;
+
 	static float input_signalLeft;
 	static float input_signalRight;
 	static float input_prev_signalLeft;
@@ -849,61 +855,64 @@ void __declspec(naked) HooksClass::Turn_Signal_Feature()
 	static CVehicle* driverbeh_vehicle = NULL;
 	static float stepTime = 0.008333f;
 
-	// FrontendInputManager->MenuLeft & MenuRight
-	input_prev_signalLeft = input_signalLeft;
-	input_prev_signalRight = input_signalRight;
-	input_signalLeft = *(float*)((*(int*)0x70c6f4) + 0x34);
-	input_signalRight = *(float*)((*(int*)0x70c6f4) + 0x40);
-
-	// check for each input if they're pressed once
-	if (input_signalLeft != 0 && input_prev_signalLeft != input_signalLeft)
+	if (SettingsMgr->bPlayer_Can_Use_Turn_Signal)
 	{
-		if (*whichOnesAreOn == 1)
-			*whichOnesAreOn = 0;
-		else
-			*whichOnesAreOn = 1;
-	}
-	if (input_signalRight != 0 && input_prev_signalRight != input_signalRight)
-	{
-		if (*whichOnesAreOn == 2)
-			*whichOnesAreOn = 0;
-		else
-			*whichOnesAreOn = 2;
-	}
+		// FrontendInputManager->MenuLeft & MenuRight
+		input_prev_signalLeft = input_signalLeft;
+		input_prev_signalRight = input_signalRight;
+		input_signalLeft = *(float*)((*(int*)0x70c6f4) + 0x34);
+		input_signalRight = *(float*)((*(int*)0x70c6f4) + 0x40);
 
-	// DEBUG DEBUG DEBUG!!!!!!!!!
-	//*whichOnesAreOn = 1;
-
-	driverbeh_character = *(CCharacter**)(previousESI + 0x2C4);
-	driverbeh_vehicle = driverbeh_character->GetVehicle();
-
-	*turnSignalSwitchTime += stepTime;
-	if (*turnSignalSwitchTime > 0.3f)
-	{
-		*turnSignalSwitchTime = 0;
-		*turnSignalLightOn = !*turnSignalLightOn;
-	}
-
-	if (driverbeh_vehicle != NULL && SettingsMgr->bPlayer_Can_Use_Turn_Signal)
-	{
-		driverbeh_vehicle->ActivateLamp(PST_FLINDICATOR, false, false); // front-left
-		driverbeh_vehicle->ActivateLamp(PST_FRINDICATOR, false, false); // front-right
-		driverbeh_vehicle->ActivateLamp(PST_BLINDICATOR, false, false); // back-left
-		driverbeh_vehicle->ActivateLamp(PST_BRINDICATOR, false, false); // back-right
-
-		if (*whichOnesAreOn > 0)
+		// check for each input if they're pressed once
+		if (input_signalLeft != 0 && input_prev_signalLeft != input_signalLeft)
 		{
-			if (*whichOnesAreOn == 1)
+			if (whichOnesAreOn == 1)
+				whichOnesAreOn = 0;
+			else
+				whichOnesAreOn = 1;
+		}
+		if (input_signalRight != 0 && input_prev_signalRight != input_signalRight)
+		{
+			if (whichOnesAreOn == 2)
+				whichOnesAreOn = 0;
+			else
+				whichOnesAreOn = 2;
+		}
+
+		// DEBUG DEBUG DEBUG!!!!!!!!!
+		//*whichOnesAreOn = 1;
+
+		driverbeh_character = *(CCharacter**)(previousESI + 0x2C4);
+		driverbeh_vehicle = driverbeh_character->GetVehicle();
+
+		turnSignalSwitchTime += stepTime;
+		if (turnSignalSwitchTime > 0.3f)
+		{
+			turnSignalSwitchTime = 0;
+			turnSignalLightOn = !turnSignalLightOn;
+		}
+
+		if (driverbeh_vehicle != NULL)
+		{
+			driverbeh_vehicle->ActivateLamp(PST_FLINDICATOR, false, false); // front-left
+			driverbeh_vehicle->ActivateLamp(PST_FRINDICATOR, false, false); // front-right
+			driverbeh_vehicle->ActivateLamp(PST_BLINDICATOR, false, false); // back-left
+			driverbeh_vehicle->ActivateLamp(PST_BRINDICATOR, false, false); // back-right
+
+			if (whichOnesAreOn > 0)
 			{
-				// left
-				driverbeh_vehicle->ActivateLamp(PST_FLINDICATOR, *turnSignalLightOn, true); // front-left
-				driverbeh_vehicle->ActivateLamp(PST_BLINDICATOR, *turnSignalLightOn, true); // back-left
-			}
-			else if (*whichOnesAreOn == 2)
-			{
-				// right
-				driverbeh_vehicle->ActivateLamp(PST_FRINDICATOR, *turnSignalLightOn, true); // front-right
-				driverbeh_vehicle->ActivateLamp(PST_BRINDICATOR, *turnSignalLightOn, true); // back-right
+				if (whichOnesAreOn == 1)
+				{
+					// left
+					driverbeh_vehicle->ActivateLamp(PST_FLINDICATOR, turnSignalLightOn, true); // front-left
+					driverbeh_vehicle->ActivateLamp(PST_BLINDICATOR, turnSignalLightOn, true); // back-left
+				}
+				else if (whichOnesAreOn == 2)
+				{
+					// right
+					driverbeh_vehicle->ActivateLamp(PST_FRINDICATOR, turnSignalLightOn, true); // front-right
+					driverbeh_vehicle->ActivateLamp(PST_BRINDICATOR, turnSignalLightOn, true); // back-right
+				}
 			}
 		}
 	}

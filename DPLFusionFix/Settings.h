@@ -12,6 +12,7 @@
 // Game
 #define DEFAULT_ALLOW_MISSION_DEBUGTEXT false
 #define DEFAULT_DEV_MENU_ON false
+#define DEFAULT_LOAD_FRONTEND_DEV_MENU false
 
 #define MINIMUM_INSTANCES_SPAWN_RADIUS 30.0f 
 #define MAXIMUM_INSTANCES_SPAWN_RADIUS 400.0f
@@ -24,6 +25,7 @@
 #define DEFAULT_PAUSE_GAME_IN_WINDOW_MODE false
 #define DEFAULT_INVERT_GARAGE_CAMERA false
 #define DEFAULT_CLASSIC_BURNOUT false
+#define DEFAULT_HEAPFREE_VALIDATION_FIX true
 
 // New Visual
 #define DEFAULT_MINIMAP_DRIVER3_GOONS true
@@ -52,6 +54,7 @@ public:
 	// Game
 	bool bAllow_Missions_Debug_Text = DEFAULT_ALLOW_MISSION_DEBUGTEXT;
 	bool bDev_Menu_On = DEFAULT_DEV_MENU_ON;
+	bool bLoad_Frontend_Dev_Menu = DEFAULT_LOAD_FRONTEND_DEV_MENU;
 	float fInstances_Spawn_Radius = DEFAULT_INSTANCES_SPAWN_RADIUS;
 
 	// Misc
@@ -60,6 +63,7 @@ public:
 	bool bPause_Game_In_Windowed_Mode = DEFAULT_PAUSE_GAME_IN_WINDOW_MODE;
 	bool bInvert_Garage_Camera = DEFAULT_INVERT_GARAGE_CAMERA;
 	bool bClassic_BurnOut = DEFAULT_CLASSIC_BURNOUT;
+	bool bHeapFree_Validation_Fix = DEFAULT_HEAPFREE_VALIDATION_FIX;
 
 	// New_Visual
 	bool bMinimap_Driver3_Goons = DEFAULT_MINIMAP_DRIVER3_GOONS;

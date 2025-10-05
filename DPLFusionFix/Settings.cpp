@@ -38,9 +38,11 @@ eSettingsManager::eSettingsManager()
 	bPause_Game_In_Windowed_Mode = user.ReadBoolean(const_cast<char*>(pszMiscSectionName), "Pause_Game_In_Windowed_Mode", DEFAULT_PAUSE_GAME_IN_WINDOW_MODE);
 	bInvert_Garage_Camera = user.ReadBoolean(const_cast<char*>(pszMiscSectionName), "Invert_Garage_Camera", DEFAULT_INVERT_GARAGE_CAMERA);
 	bClassic_BurnOut = user.ReadBoolean(const_cast<char*>(pszMiscSectionName), "Classic_BurnOut", DEFAULT_CLASSIC_BURNOUT);
+	bHeapFree_Validation_Fix = user.ReadBoolean(const_cast<char*>(pszMiscSectionName), "HeapFree_Validation_Fix", DEFAULT_HEAPFREE_VALIDATION_FIX);
 
 	bPlayer_Can_Use_Turn_Signal = user.ReadBoolean(const_cast<char*>(pszNew_FeatureSectionName), "Player_Can_Use_Turn_Signal", DEFAULT_PLAYER_CAN_USE_TURN_SIGNAL);
 
+	bLoad_Frontend_Dev_Menu = user.ReadBoolean(const_cast<char*>(pszGameSectionName), "Load_Frontend_Dev_Menu", DEFAULT_LOAD_FRONTEND_DEV_MENU);
 	bMinimap_Driver3_Goons = user.ReadBoolean(const_cast<char*>(pszNew_VisualSectionName), "Minimap_Driver3_Goons", DEFAULT_MINIMAP_DRIVER3_GOONS);
 	bAllow_Missions_Debug_Text = user.ReadBoolean(const_cast<char*>(pszGameSectionName), "Allow_Missions_Debug_Text", DEFAULT_ALLOW_MISSION_DEBUGTEXT);
 	bDev_Menu_On = user.ReadBoolean(const_cast<char*>(pszGameSectionName), "Dev_Menu_On", DEFAULT_DEV_MENU_ON);
