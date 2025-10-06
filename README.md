@@ -50,6 +50,7 @@ You can adjust the settings simply by editing the **dplfusionfix_userconfig.ini*
 ### Game
 - **Allow_Missions_Debug_Text=False**, allows the missions debugging text to be printed out in the console output, you can enable the console output at **Misc -> Show_Console_Output=True**.
 - **Dev_Menu_On=False**, when set to **True**, it enables the debug button in the pause menu to enter the debug menu that is now functional.
+- **Load_Frontend_Dev_Menu=False**, when set to **False**, the dev menu won't be loaded by DPLFusionFix, this could help in fixing crashes or useless memory allocation.
 - **Instances_Spawn_Radius=210.000000**, the higher this value is, the more the range of NPCs spawning within T.K.'s area will increase, be aware that this can give infinite loading screens when the value is too high.
 ### Misc
 - **Show_Console_Output=False**, shows a console window associated with the Driver: Parallel Lines' window.
@@ -57,6 +58,7 @@ You can adjust the settings simply by editing the **dplfusionfix_userconfig.ini*
 - **Pause_Game_In_Windowed_Mode=False**, will pause the game when set to **True** if the window of the game is not focused.
 - **Invert_Garage_Camera=False**, will invert the garage's camera when set to **True**, useful if you're used to the PS2 version's inverted camera look.
 - **Classic_BurnOut=False**, when set to **True**, the burnout will work like in previous games of the franchise.
+- **HeapFree_Validation_Fix=True**, when set to **True**, the chances to crash in "Era Change" state or going back to the main menu at a certain point will be low.
 ### New_Visual
 - **Minimap_Driver3_Goons=True**, when the value is **True**, thugs icons in the mini-map will have a similar appearence as in DRIV3R.
 ### New_Feature
