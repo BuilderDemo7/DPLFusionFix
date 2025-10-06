@@ -1,3 +1,5 @@
+<img width="2788" height="1107" alt="DPL Fusion Fix" src="https://github.com/user-attachments/assets/db5d187b-b2ae-4e24-bdb0-c8dc3e1ccb3a" />
+
 # Driver: Parallel Lines - Fusion Fix
 This is a project that aims to fix issues and add small features in the PC port of DRIVER: Parallel Lines (2007)
 
