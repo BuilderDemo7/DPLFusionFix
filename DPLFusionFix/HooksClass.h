@@ -24,6 +24,7 @@ public:
 	static void ProcessCommandExtension_Frontend();
 
 	static void GameSimulationStep();
+	static void SimulationDraw();
 
 	static void GameOverlays_DrawHooked_Debug();
 	static void OverheadMap_DrawHooked_Debug();

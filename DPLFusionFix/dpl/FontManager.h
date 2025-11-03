@@ -16,14 +16,15 @@ struct FontSpecs {
 	struct Vector4 colour { 1, 1, 1, 1 };
 	int fontType;
 	int textType;
+	float x;
+	float y;
+	float w = -1.0f;
+	float xScale = 1.0f;
+	float yScale = 1.0f;
 	float spacing;
 	enum EJustify justify;
 	unsigned int flags;
-	float x;
-	float y;
-	float w = 1.0f;
-	float xScale = 1.0f;
-	float yScale = 1.0f;
+
 	char field11_0x38;
 	char field12_0x39;
 	char field13_0x3a;
@@ -37,8 +38,10 @@ struct FontSpecs {
 class CFontManager
 {
 public:
+	void DebugPrint(CPCViewport *piView, FontSpecs *spec, char *szString);
+
 	void Print(Vector4* dimensions, AutoPtr<CPCViewport, int> piView, FontSpecs *spec, unsigned int textID, int unk1);
-	void Print(Vector4* dimensions, AutoPtr<CPCViewport, int> piView, FontSpecs *spec, wchar_t* szFormat, int unk1);
+	void Print(CPCViewport* piView, FontSpecs *spec, char* szFormat, Vector4 offset);
 	void PrintFast(Vector4* dimensions, CPCViewport* piView, FontSpecs *spec, unsigned int textID, int unk1);
 	void PrintFast(Vector4* dimensions, CPCViewport* piView, FontSpecs *spec, wchar_t* szFormat, int unk1);
 	void Print(Vector4* dimensions, AutoPtr<CPCViewport, int> piView, FontSpecs *spec, const wchar_t* szFormat, int unk1);

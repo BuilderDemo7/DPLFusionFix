@@ -67,3 +67,4 @@ void SetPlayerAsCharacter(CCharacter* newCharacter);
 void SetPlayerBackToOriginal();
 
 void OnGameStep();
+void OnSimulationDraw(CPCViewport* viewport);

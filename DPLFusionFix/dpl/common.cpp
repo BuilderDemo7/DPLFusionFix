@@ -11,6 +11,7 @@
 #include "Vector4.h"
 #include <iostream>
 #include "AutoPtr.h"
+#include "FontManager.h"
 
 using namespace Common;
 
@@ -55,6 +56,24 @@ void LoadDevMenu()
 			printf("GUI\\DEV.MEC Loaded!\n");
 		}
 	}
+}
+
+void OnSimulationDraw(CPCViewport* viewport)
+{
+	// bruh, damn you CFontManager optimized functions
+	/*
+	CFontManager* fontman = GetFontManager();
+	if (fontman != NULL)
+	{
+		Vector4 offset;
+		offset.X, offset.Y, offset.Z, offset.W = 0;
+		FontSpecs spec;
+		spec.x = 0.1f;
+		spec.y = 0.1f;
+		//fontman->DebugPrint(viewport, &spec, const_cast<char*>("Hello"));
+		fontman->Print(viewport, &spec, const_cast<char*>("Hello"), offset);
+	}
+	*/
 }
 
 void OnGameStep()

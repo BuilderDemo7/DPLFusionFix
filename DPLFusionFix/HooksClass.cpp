@@ -946,3 +946,77 @@ void __declspec(naked) HooksClass::Turn_Signal_Feature()
 		jmp jumpback_0x49f98c
 	}
 }
+
+void __declspec(naked) HooksClass::SimulationDraw()
+{
+	static unsigned int previousEAX = 0;
+	static unsigned int previousEBX = 0;
+	static unsigned int previousECX = 0;
+	static unsigned int previousEDX = 0;
+	static unsigned int previousEDI = 0;
+	static unsigned int previousEBP = 0;
+	static unsigned int previousESI = 0;
+	static unsigned int previousESP = 0;
+
+	// Backup registers
+	_asm
+	{
+		mov[previousEAX], eax
+		mov[previousEBX], ebx
+		mov[previousECX], ecx
+		mov[previousEDX], edx
+		mov[previousEDI], edi
+		mov[previousEBP], ebp
+		mov[previousESP], esp
+		mov[previousESI], esi
+	}
+
+	// code here
+	static CPCViewport* vp;
+	_asm
+	{
+		mov ebp, [previousEBP]
+		mov edx, [ebp + 0x0C]
+
+		mov vp, edx
+	}
+	if (vp != NULL)
+		OnSimulationDraw(vp);
+
+	// Restore registers
+	__asm
+	{
+		mov eax, [previousEAX]
+		mov ebx, [previousEBX]
+		mov ecx, [previousECX]
+		mov edx, [previousEDX]
+		mov edi, [previousEDI]
+		mov esp, [previousESP]
+		mov ebp, [previousEBP]
+
+		mov esi, [previousESI]
+	}
+
+	// original instruction (formerly)
+	/*
+	static int callAddr = 0x5321fc;
+	_asm
+	{
+		call callAddr
+		jmp Jumpback
+	}
+	*/
+	// original instruction (new)
+	static int ptr_0x70c5b4 = *(int*)0x70c5b4;
+	_asm
+	{
+		mov ecx, dword ptr[ptr_0x70c5b4]
+	}
+
+	// Jump back
+	static int jumpback_0x4def7e = 0x4def7e;
+	_asm
+	{
+		jmp jumpback_0x4def7e
+	}
+}
