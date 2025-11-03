@@ -401,7 +401,7 @@ static void SetDebugOptionValue(char* optionName, int value, bool canRoll = true
 				if (limitedValue < 0)
 					limitedValue = 0x11;
 			}
-			*(char*)(0x430046 + 0x1) = (char)limitedValue;
+			Set_Debug_Cop2006InitWep((char)limitedValue);
 		}
 		else if (_stricmp(optionName, g_Cop1978InitWep) == 0)
 		{
@@ -419,7 +419,7 @@ static void SetDebugOptionValue(char* optionName, int value, bool canRoll = true
 				if (limitedValue < 0)
 					limitedValue = 0x11;
 			}
-			*(char*)(0x43004a + 0x1) = (char)limitedValue;
+			Set_Debug_Cop1978InitWep((char)limitedValue);
 		}
 		else if (_stricmp(optionName, g_LFSPingOut) == 0)
 		{

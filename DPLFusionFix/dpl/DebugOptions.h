@@ -22,3 +22,6 @@ extern int bDebug_Min_SetGameDiff;
 void Update_Debug_DisableLoadingScreen();
 void Update_Debug_InvincibleToWater();
 void Update_Debug_NoCollisions();
+
+void Set_Debug_Cop2006InitWep(char newOne);
+void Set_Debug_Cop1978InitWep(char newOne);
