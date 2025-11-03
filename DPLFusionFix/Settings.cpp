@@ -42,6 +42,7 @@ eSettingsManager::eSettingsManager()
 
 	bPlayer_Can_Use_Turn_Signal = user.ReadBoolean(const_cast<char*>(pszNew_FeatureSectionName), "Player_Can_Use_Turn_Signal", DEFAULT_PLAYER_CAN_USE_TURN_SIGNAL);
 
+	bHighPoly_Civilian_Cars = user.ReadBoolean(const_cast<char*>(pszRendererSectionName), "HighPoly_Civilian_Cars", DEFAULT_HIGHPOLY_CIVILIAN_CARS);
 	bLoad_Frontend_Dev_Menu = user.ReadBoolean(const_cast<char*>(pszGameSectionName), "Load_Frontend_Dev_Menu", DEFAULT_LOAD_FRONTEND_DEV_MENU);
 	bMinimap_Driver3_Goons = user.ReadBoolean(const_cast<char*>(pszNew_VisualSectionName), "Minimap_Driver3_Goons", DEFAULT_MINIMAP_DRIVER3_GOONS);
 	bAllow_Missions_Debug_Text = user.ReadBoolean(const_cast<char*>(pszGameSectionName), "Allow_Missions_Debug_Text", DEFAULT_ALLOW_MISSION_DEBUGTEXT);

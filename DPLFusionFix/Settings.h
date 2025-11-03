@@ -6,6 +6,7 @@
 #define DEFAULT_DRAW_DISTANCE2 435.0f
 #define DEFAULT_DRAW_DISTANCE3 510.0f
 #define DEFAULT_VEHICLES_HEADLIGHT_ANGLE 45.0f
+#define DEFAULT_HIGHPOLY_CIVILIAN_CARS true
 #define DEFAULT_PS2_GLOW_SFX_SET true
 #define DEFAULT_BACKGROUND_GLOW_IN_SHADER1 true
 
@@ -48,6 +49,7 @@ public:
 	float fDraw_Distance2 = DEFAULT_DRAW_DISTANCE2;
 	float fDraw_Distance3 = DEFAULT_DRAW_DISTANCE3;
 	float fVehicles_HeadLight_DegreesAngle = DEFAULT_VEHICLES_HEADLIGHT_ANGLE;
+	bool bHighPoly_Civilian_Cars = DEFAULT_HIGHPOLY_CIVILIAN_CARS;
 	bool bPS2_Glow_Effects_Settings = DEFAULT_PS2_GLOW_SFX_SET;
 	bool bBackground_Glow_In_ShaderVer_1 = DEFAULT_BACKGROUND_GLOW_IN_SHADER1;
 

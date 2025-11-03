@@ -74,11 +74,14 @@ void OnInitializePlugin()
 	WritePointerAt(0x448356 + 4, reinterpret_cast<uintptr_t>(&GameChangableSettings::g_fPedPingIn));
 	WritePointerAt(0x404275 + 3, reinterpret_cast<uintptr_t>(&GameChangableSettings::g_fAICivilianCarGiveUpJourneySquareDistance));
 
-	// civilian cars' rendering priority is set to 0x5 (eVehiclePriorityForeground or eVehicleControlScripted)
-	WriteAt(0x40d64c + 1, "\x05", 1); // PARKED CARS - AIVehicleClass::vehicleSetRenderingPriority(..., eVehiclePriorityForeground);
-	WriteAt(0x4107dd + 1, "\x05", 1); // VIRTUAL PING IN - AIVehicleClass::vehicleSetRenderingPriority(..., eVehiclePriorityForeground);
-	WriteAt(0x410b0f + 1, "\x05", 1); // ??? - AIVehicleClass::vehicleSetRenderingPriority(..., eVehiclePriorityForeground);
-	WriteAt(0x412b1e + 1, "\x05", 1); // AIManagerClass step - AIVehicleClass::vehicleSetRenderingPriority(..., eVehiclePriorityForeground);
+	if (SettingsMgr->bHighPoly_Civilian_Cars)
+	{
+		// civilian cars' rendering priority is set to 0x5 (eVehiclePriorityForeground or eVehicleControlScripted)
+		WriteAt(0x40d64c + 1, "\x05", 1); // PARKED CARS - AIVehicleClass::vehicleSetRenderingPriority(..., eVehiclePriorityForeground);
+		WriteAt(0x4107dd + 1, "\x05", 1); // VIRTUAL PING IN - AIVehicleClass::vehicleSetRenderingPriority(..., eVehiclePriorityForeground);
+		WriteAt(0x410b0f + 1, "\x05", 1); // ??? - AIVehicleClass::vehicleSetRenderingPriority(..., eVehiclePriorityForeground);
+		WriteAt(0x412b1e + 1, "\x05", 1); // AIManagerClass step - AIVehicleClass::vehicleSetRenderingPriority(..., eVehiclePriorityForeground);
+	}
 
 	// TODO: maybe fix this... it's for the complete mission debug option
 	//Patch(0x647A20, &CLifeNode_MissionComplete::OnUpdate);
