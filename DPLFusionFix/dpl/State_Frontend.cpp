@@ -40,6 +40,8 @@ const char* g_SetGameDifficulty = "Set Game Difficulty";
 const char* g_SetOdometerDist = "Set Odometer Distance";
 const char* g_CopSkinAsset = "Cop Skin Asset";
 const char* g_CopCarAsset = "Cop Car Asset";
+const char* g_Cop2006InitWep = "Cop 2006 Initial Weapon";
+const char* g_Cop1978InitWep = "Cop 1978 Initial Weapon";
 
 const char* g_LFSPingOut = "Life System Instances Ping Out";
 const char* g_LFSPingIn = "Life System Instances Ping In";
@@ -80,6 +82,9 @@ const char* CState_Frontend::m_pszGameDebugOptions[] = {
 
 	g_CopSkinAsset,
 	g_CopCarAsset,
+
+	g_Cop2006InitWep,
+	g_Cop1978InitWep,
 
 	g_DebugOptionsSeperator,
 
@@ -205,6 +210,14 @@ static int GetDebugOptionValue(char* optionName)
 		else if (_stricmp(optionName, g_CopSkinAsset) == 0)
 		{
 			return *(int*)(0x6e7468);
+		}
+		else if (_stricmp(optionName, g_Cop2006InitWep) == 0)
+		{
+			return (int)*(char*)(0x430046 + 0x1);
+		}
+		else if (_stricmp(optionName, g_Cop1978InitWep) == 0)
+		{
+			return (int)*(char*)(0x43004a + 0x1);
 		}
 		else if (_stricmp(optionName, g_LFSPingOut) == 0)
 		{
@@ -371,6 +384,42 @@ static void SetDebugOptionValue(char* optionName, int value, bool canRoll = true
 					limitedValue = 255;
 			}
 			*(int*)(0x6e7468) = limitedValue;
+		}
+		else if (_stricmp(optionName, g_Cop2006InitWep) == 0)
+		{
+			if (!canRoll)
+			{
+				if (limitedValue > 0x11)
+					limitedValue = 0x11;
+				if (limitedValue < 0)
+					limitedValue = 0;
+			}
+			else
+			{
+				if (limitedValue > 0x11)
+					limitedValue = 0;
+				if (limitedValue < 0)
+					limitedValue = 0x11;
+			}
+			*(char*)(0x430046 + 0x1) = (char)limitedValue;
+		}
+		else if (_stricmp(optionName, g_Cop1978InitWep) == 0)
+		{
+			if (!canRoll)
+			{
+				if (limitedValue > 0x11)
+					limitedValue = 0x11;
+				if (limitedValue < 0)
+					limitedValue = 0;
+			}
+			else
+			{
+				if (limitedValue > 0x11)
+					limitedValue = 0;
+				if (limitedValue < 0)
+					limitedValue = 0x11;
+			}
+			*(char*)(0x43004a + 0x1) = (char)limitedValue;
 		}
 		else if (_stricmp(optionName, g_LFSPingOut) == 0)
 		{
